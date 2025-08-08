@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🎟️ لوتو كريبتو — سحوبات يومية | تذكرة 1 USDT</title>
+  <meta name="description" content="سحوبات يومية شفافة، تذكرة بسعر 1 USDT (TRC20). اشترِ تذاكر جاهزة، تابع العدّ التنازلي، واعرف الفائزين. نسخة تجريبية تعليمية.">
+  <style>
+    :root{
+      --bg:#0b0f1a;
+      --bg2:#0f1320;
+      --card:#12182a;
+      --edge:#1e2540;
+      --text:#e7ecf3;
+      --muted:#94a3b8;
+      --accent:#22c55e;
+      --accent2:#38bdf8;
+      --warning:#f59e0b;
+      --danger:#ef4444;
+      --radius:18px;
+      --shadow:0 12px 40px rgba(0,0,0,.35);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Naskh Arabic","Noto Sans Arabic",Tahoma,Arial,sans-serif;
+      background: radial-gradient(1200px 800px at 80% -200px, rgba(56,189,248,.12), transparent 60%),
+                  radial-gradient(900px 600px at 10% 30%, rgba(34,197,94,.10), transparent 60%),
+                  linear-gradient(180deg, var(--bg), var(--bg2));
+      color:var(--text);
+      line-height:1.8;
+      overflow-x:hidden;
+    }
+    a{color:#93c5fd;text-decoration:none}
+    a:hover{text-decoration:underline}
+    .container{max-width:1200px;margin:0 auto;padding:20px}
+    /* NAV */
+    .nav{
+      position:sticky;top:0;z-index:1000;
+      backdrop-filter:saturate(1.2) blur(8px);
+      background:linear-gradient(180deg, rgba(18,24,42,.85), rgba(18,24,42,.6));
+      border-bottom:1px solid rgba(255,255,255,.06);
+    }
+    .nav-inner{display:flex;align-items:center;gap:16px;justify-content:space-between;padding:12px 20px}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:800}
+    .brand .logo{
+      width:34px;height:34px;border-radius:10px;
+      background:conic-gradient(from 180deg, var(--accent), var(--accent2), #60a5fa, var(--accent));
+      box-shadow:0 0 20px rgba(56,189,248,.35);
+    }
+    .menu{display:flex;gap:12px;flex-wrap:wrap}
+    .menu a{
+      padding:8px 12px;border-radius:12px;border:1px solid rgba(255,255,255,.06);
+      background:rgba(255,255,255,.02);
+      font-size:14px
+    }
+    .cta{display:flex;gap:8px;align-items:center}
+    .btn{
+      border:none;cursor:pointer;padding:10px 14px;border-radius:12px;
+      font-size:14px;transition:transform .08s ease, box-shadow .15s ease, background .2s ease;
+      color:#0b1020;background:var(--accent);box-shadow:0 10px 20px rgba(34,197,94,.25)
+    }
+    .btn.secondary{background:var(--accent2);box-shadow:0 10px 20px rgba(56,189,248,.25)}
+    .btn.ghost{color:var(--text);background:transparent;border:1px solid rgba(255,255,255,.12);box-shadow:none}
+    .btn:active{transform:translateY(1px) scale(.99)}
+    /* HERO */
+    .hero{position:relative;overflow:hidden;border-bottom:1px solid rgba(255,255,255,.06)}
+    .hero .container{padding-top:28px;padding-bottom:28px}
+    .split{display:grid;grid-template-columns:1.2fr .8fr;gap:22px}
+    @media (max-width: 980px){.split{grid-template-columns:1fr}}
+    .card{
+      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      border:1px solid rgba(255,255,255,.06);
+      border-radius:var(--radius);padding:18px;box-shadow:var(--shadow);backdrop-filter:blur(6px);
+    }
+    .muted{color:var(--muted);font-size:13.5px}
+    .big{font-size:36px;font-weight:800;letter-spacing:.5px;margin:4px 0 10px}
+    .label{color:var(--muted);font-size:14px;margin-bottom:6px}
+    .mono{font-family:ui-monospace,Menlo,Consolas,"Courier New",monospace}
+    .address{direction:ltr;background:#0f1426;border:1px solid rgba(255,255,255,.10);border-radius:12px;padding:12px;word-break:break-all;font-size:14px}
+    .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:10px}
+    .pill{
+      background:#0f1426;border:1px solid rgba(255,255,255,.08);border-radius:12px;
+      padding:10px 14px;min-width:70px;text-align:center;font-variant-numeric:tabular-nums
+    }
+    .countdown{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+    .statbar{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px}
+    @media (max-width:780px){.statbar{grid-template-columns:1fr 1fr}}
+    .stat{display:flex;flex-direction:column;gap:2px;background:#0f1426;border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:10px 12px}
+    .ticker{
+      display:flex;gap:16px;align-items:center;margin-top:10px;
+      padding:10px 12px;border-radius:12px;background:rgba(56,189,248,.08);
+      border:1px solid rgba(56,189,248,.25);white-space:nowrap;overflow:hidden;position:relative;
+    }
+    .ticker span{animation:scroll 18s linear infinite;display:inline-block;padding-left:100%}
+    @keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-100%)}}
+    /* SECTIONS */
+    section{scroll-margin-top:90px}
+    h2{margin:0 0 12px}
+    .grid{display:grid;gap:16px}
+    .grid.cols-3{grid-template-columns:repeat(3,1fr)}
+    @media (max-width:980px){.grid.cols-3{grid-template-columns:1fr}}
+    .ticket-card{
+      position:relative;overflow:hidden;
+      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+      border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:14px;
+      transition:transform .15s ease, box-shadow .2s ease;
+    }
+    .ticket-card:hover{transform:translateY(-2px);box-shadow:0 18px 40px rgba(0,0,0,.35)}
+    .badge{font-size:11px;color:#0b1020;background:var(--warning);padding:4px 8px;border-radius:999px}
+    .winner{display:flex;justify-content:space-between;align-items:center;border-top:1px dashed rgba(255,255,255,.12);padding-top:10px;margin-top:10px}
+    /* FOOTER */
+    footer{margin:40px 0 20px;text-align:center;color:var(--muted);font-size:12px}
+    /* TOAST */
+    .toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:rgba(34,197,94,.95);color:#0b1020;padding:10px 14px;border-radius:10px;box-shadow:var(--shadow);z-index:2000}
+    .toast.err{background:rgba(239,68,68,.95)}
+    /* PARTICLES CANVAS */
+    #fx{position:fixed;inset:0;z-index:-1}
+    /* MOBILE FAB */
+    .fab{position:fixed;bottom:18px;right:18px;z-index:1200}
+    .fab .btn{border-radius:999px;padding:14px 16px;font-weight:700}
+  </style>
+</head>
+<body>
+  <canvas id="fx"></canvas>
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-inner container">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <div>لوتو كريبتو</div>
+      </div>
+      <div class="menu">
+        <a href="#buy">شراء</a>
+        <a href="#draws">السحوبات</a>
+        <a href="#winners">الفائزون</a>
+        <a href="#stats">الإحصائيات</a>
+        <a href="#faq">الأسئلة</a>
+      </div>
+      <div class="cta">
+        <button class="btn secondary" id="bellBtn">🔔 اشترك</button>
+        <button class="btn" id="copyAddrTop">نسخ العنوان</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="container">
+      <div class="split">
+        <!-- PAY / QR -->
+        <section class="card" id="buy">
+          <div class="label">عنوان الدفع — USDT (TRC20):</div>
+          <div id="address" class="address mono">TDjG5X3fvHcBpnESA9GxNMEoS59cTSLayt</div>
+          <div class="row">
+            <button id="copyBtn" class="btn">نسخ العنوان</button>
+            <button id="formBtn" class="btn secondary">إرسال TxID عبر النموذج</button>
+            <button id="refreshQR" class="btn ghost">تحديث QR</button>
+          </div>
+          <p class="muted">⬆️ بعد التحويل: أرسل <b>TxID</b> + عنوان محفظتك + عدد التذاكر عبر النموذج.</p>
+          <div class="row" style="margin-top: 12px; align-items:flex-start">
+            <div id="qrcode"></div>
+            <div class="statbar" style="flex:1">
+              <div class="stat">
+                <div class="muted">الزوار الآن</div>
+                <div class="big mono" id="visitors">000</div>
+              </div>
+              <div class="stat">
+                <div class="muted">المشتركين</div>
+                <div class="big mono" id="subs">0</div>
+              </div>
+              <div class="stat">
+                <div class="muted">المجموع الكلي</div>
+                <div class="big mono" id="jackpot">0 USDT</div>
+              </div>
+              <div class="stat">
+                <div class="muted">تذاكر اليوم</div>
+                <div class="big mono" id="tickets">0</div>
+              </div>
+            </div>
+          </div>
+          <div class="ticker mono">
+            <span id="marquee">⚡ يتم اختيار الفائز علنًا بالاعتماد على Hash آخر بلوك بعد وقت السحب مباشرة · التذكرة = 1 USDT · شبكة TRC20 · نسخة تعليمية تجريبية · بالتوفيق للجميع! ⚡</span>
+          </div>
+        </section>
+
+        <!-- COUNTDOWN / FORM -->
+        <section class="card">
+          <div class="label">موعد السحب القادم</div>
+          <div id="countdown" class="countdown">
+            <div class="pill"><div id="d">00</div><div class="muted">أيام</div></div>
+            <div class="pill"><div id="h">00</div><div class="muted">ساعات</div></div>
+            <div class="pill"><div id="m">00</div><div class="muted">دقائق</div></div>
+            <div class="pill"><div id="s">00</div><div class="muted">ثوانٍ</div></div>
+          </div>
+          <div class="muted" style="margin-top:10px">التوقيت حسب جهازك المحلي.</div>
+          <hr style="border:none;border-top:1px solid rgba(255,255,255,.08);margin:14px 0" />
+          <div class="label">رابط النموذج</div>
+          <div class="address mono" id="formLinkBox"><span id="formLinkText">https://forms.gle/your-google-form-id</span></div>
+          <div class="row">
+            <button id="openForm" class="btn secondary">فتح النموذج</button>
+            <button id="copyForm" class="btn ghost">نسخ الرابط</button>
+          </div>
+          <p class="muted">🔧 غيّر رابط النموذج من الكود (formUrl) لاحقًا.</p>
+        </section>
+      </div>
+    </div>
+  </header>
+
+  <!-- DRAWS -->
+  <main class="container">
+    <section id="draws" class="card">
+      <h2>🎯 السحوبات</h2>
+      <div class="grid cols-3" id="drawCards"></div>
+    </section>
+
+    <section id="winners" class="card" style="margin-top:16px">
+      <h2>🏆 الفائزون (تجريبي)</h2>
+      <div id="winnersList" class="grid"></div>
+      <p class="muted">ننشر رقم التذكرة الفائزة و TxID تحويل الجائزة بعد كل سحب.</p>
+    </section>
+
+    <section id="stats" class="card" style="margin-top:16px">
+      <h2>📈 الإحصائيات والشفافية</h2>
+      <ol>
+        <li>سعر التذكرة: <b>1 USDT</b> على شبكة TRC20.</li>
+        <li>الاختيار العلني للفائز: نحسب <span class="mono">الفائز = (قيمة_هاش_البلوك % إجمالي_التذاكر) + 1</span>.</li>
+        <li>ننشر: الهاش، عدد التذاكر، ورقم التذكرة الفائزة.</li>
+        <li>الجائزة تُرسل يدويًا مع نشر TxID.</li>
+      </ol>
+      <div class="winner">
+        <div class="muted">© <span id="year"></span> لوتو كريبتو — نسخة تجريبية تعليمية.</div>
+        <button class="btn ghost" id="simulateSale">+ بيع تذكرة (للتجربة)</button>
+      </div>
+    </section>
+
+    <section id="faq" class="card" style="margin-top:16px">
+      <h2>❓ الأسئلة الشائعة</h2>
+      <details>
+        <summary>هل هذا موقع حقيقي أم تجربة؟</summary>
+        <p class="muted">هذه نسخة واجهة أمامية تجريبية تعليمية فقط. أنت مسؤول عن الجانب القانوني والباك إند والدفع.</p>
+      </details>
+      <details>
+        <summary>كيف أحصل على وصل شراء؟</summary>
+        <p class="muted">اربط الواجهة مع باك إند (Webhook للدفع) لتوليد وصل موقّع Hash لكل عملية. حاليًا تُعرض أرقام محاكاة.</p>
+      </details>
+      <details>
+        <summary>هل يمكنني استخدام شبكة/عملة أخرى؟</summary>
+        <p class="muted">نعم؛ عدّل المتغيرات في أعلى ملف JS (العنوان والعملات).</p>
+      </details>
+    </section>
+  </main>
+
+  <div class="fab">
+    <button class="btn secondary" id="toTop">⬆️ أعلى</button>
+  </div>
+
+  <!-- qrcode.js (inlined minimal) -->
+  <script>
+  /*! qrcode.js - MIT License - https://davidshimjs.github.io/qrcodejs/ */
+  !function(o){function t(o){this.mode=e.MODE_8BIT_BYTE,this.data=o,this.parsedData=[];for(var t=0,r=this.data.length;t<r;t++){var n=[],h=this.data.charCodeAt(t);h>65536?(n[0]=240|(1835008&h)>>>18,n[1]=128|(258048&h)>>>12,n[2]=128|(4032&h)>>>6,n[3]=128|63&h):h>2048?(n[0]=224|(61440&h)>>>12,n[1]=128|(4032&h)>>>6,n[2]=128|63&h):h>128?(n[0]=192|(1984&h)>>>6,n[1]=128|63&h):n[0]=h,this.parsedData.push(n)}this.parsedData=function(o){for(var t=[],r=0;r<o.length;r++)t=t.concat(o[r]);return t}(this.parsedData),this.parsedData.length!=this.data.length&&(this.parsedData.unshift(239,187,191))}function r(o,t){this.typeNumber=o,this.errorCorrectLevel=t,this.modules=null,this.moduleCount=0,this.dataCache=null,this.dataList=[]}function n(o,t){if(void 0==o.length)throw new Error(o.length+"/"+t);for(var r=0;r<o.length&&0==o[r];)r++;this.num=Array(o.length-r+t);for(var n=0;n<o.length-r;n++)this.num[n]=o[n+r]}function h(o,t){this.totalCount=o,this.dataCount=t}function i(){this.buffer=[],this.length=0}var e={};t.prototype={getLength:function(o){return this.parsedData.length},write:function(o){for(var t=0;t<this.parsedData.length;t++)o.put(this.parsedData[t],8)}},e.PAD0=236,e.PAD1=17,e.createData=function(o,t,r){for(var h=new i,a=0;a<r.length;a++){var e=r[a];h.put(e.mode,4),h.put(e.getLength(),e.getLengthInBits(o)),e.write(h)}var u=e.getRSBlocks(o,t),s=0;for(a=0;a<u.length;a++)s+=u[a].dataCount;for(var f=new i,c=0;c<u.length;c++)f.put(0,8);for(;h.getLengthInBits()+4<=8*s;)h.put(0,4);for(;h.getLengthInBits()%8!=0;)h.put(0,1);for(var l=[],p=0;p<h.buffer.length;p++)l.push(255&h.buffer[p]);for(var d=0;d<u.length;d++){var v=u[d].dataCount,m=u[d].totalCount-v,g=l.splice(0,v),y=e.getErrorCorrectPolynomial(m),b=new n(g,y.getLength()-1),w=b.mod(y);for(;w.getLength()<m;)w.num.unshift(0);var C=g.concat(w.num);f.buffer=f.buffer.concat(C)}return f},e.Polynomial=function(o,t){if(void 0==o.length)throw new Error(o.length+"/"+t);for(var r=0;r<o.length&&0==o[r];)r++;this.num=Array(o.length-r+t);for(var n=0;n<o.length-r;n++)this.num[n]=o[n+r]},e.Polynomial.prototype={get:function(o){return this.num[o]},getLength:function(){return this.num.length},multiply:function(o){for(var t=Array(this.getLength()+o.getLength()-1),r=0;r<this.getLength();r++)for(var n=0;n<o.getLength();n++)t[r+n]+=this.get(r)*o.get(n);return new e.Polynomial(t,0)},mod:function(o){if(this.getLength()-o.getLength()<0)return this;var t=e.glog(this.get(0))-e.glog(o.get(0)),r=Array(this.getLength());for(var n=0;n<this.getLength();n++)r[n]=this.get(n);for(n=0;n<o.getLength();n++)r[n]^=e.gexp(e.glog(o.get(n))+t);return new e.Polynomial(r,0).mod(o)}},e.glog=function(o){if(o<1)throw new Error("glog("+o+")");return e.LOG_TABLE[o]},e.gexp=function(o){for(;o<0;)o+=255;for(;o>=256;)o-=255;return e.EXP_TABLE[o]};for(var a=Array(256),u=0;u<8;u++)a[u]=1<<u;for(var s=Array(256),f=0;f<256;f++){for(var c=f,l=0;l<8;l++)c=1&c?c>>>1^285:c>>>1;s[f]=c}e.RS_BLOCK_TABLE=[[1,26,19],[1,44,34],[1,70,55],[1,100,80],[1,134,108],[2,86,68],[2,98,78],[2,121,97],[2,146,116],[2,86,68],[2,98,78],[2,121,97],[2,146,116]];for(var l=0;l<256;l++)e.EXP_TABLE[l]=1>l?1:e.EXP_TABLE[l-1]<<1^283&(e.EXP_TABLE[l-1]<<1);for(l=0;l<256;l++)e.LOG_TABLE[e.EXP_TABLE[l]]=l;e.getRSBlocks=function(o,t){var n=e.RS_BLOCK_TABLE[o-1];if(void 0==n)throw new Error("bad rs block @ typeNumber:"+o);for(var i=[],a=0;a<n.length/3;a++)for(var u=n[3*a+0],s=n[3*a+1],f=n[3*a+2],c=0;c<u;c++)i.push(new h(s,f));return i},i.prototype={get:function(o){var t=Math.floor(o/8);return 1==(this.buffer[t]>>>7-o%8&1)},put:function(o,t){for(var r=0;r<t;r++)this.putBit(1==(o>>>t-r-1&1))},getLengthInBits:function(){return this.length},putBit:function(o){var t=Math.floor(this.length/8);this.buffer.length<=t&&this.buffer.push(0),o&&(this.buffer[t]|=128>>>this.length%8),this.length++}};var p={};p.stringToBytes=function(o){var r=[];for(var n=0;n<o.length;n++){var h=o.charCodeAt(n);h<128?r.push(h):h<2048?(r.push(192|h>>6),r.push(128|63&h)):h<55296||h>=57344?(r.push(224|h>>12),r.push(128|63&h>>6),r.push(128|63&h&63)):n++,h=(65536+((1023&h)<<10|1023&o.charCodeAt(n)))>>>18,r.push(240|h>>18,128|h>>12&63,128|h>>6&63,128|63&h&63)}return r};var d={};d.stringToBytes=function(o){return p.stringToBytes(o)};var v={};v.QRNumber=t,v.QR8bitByte=t,v.QRCode=r,v.QRErrorCorrectLevel={L:1,M:0,Q:3,H:2},o.QRCode=v}(window);
+  </script>
+
+  <script>
+    // ===== Config =====
+    const usdtAddress = "TDjG5X3fvHcBpnESA9GxNMEoS59cTSLayt"; // عدّل إن لزم
+    const formUrl = "https://forms.gle/your-google-form-id"; // ضع رابط Google Form
+    const dailyDrawHour = 21; // 9 PM محلي
+    const baseTicketPrice = 1; // USDT
+    // ===== Elements =====
+    const $ = (sel)=>document.querySelector(sel);
+    const $$ = (sel)=>document.querySelectorAll(sel);
+
+    // ===== Particles Background =====
+    const canvas = document.getElementById('fx');
+    const ctx = canvas.getContext('2d');
+    const particles = [];
+    const PNUM = 70;
+    function resize(){canvas.width=innerWidth;canvas.height=innerHeight}
+    addEventListener('resize',resize);resize();
+    function spawn(){
+      return {
+        x: Math.random()*canvas.width,
+        y: Math.random()*canvas.height,
+        r: Math.random()*2+0.6,
+        vx:(Math.random()-.5)*0.4,
+        vy:(Math.random()-.5)*0.4,
+        a: Math.random()*360
+      }
+    }
+    for(let i=0;i<PNUM;i++) particles.push(spawn());
+    function loop(){
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      for(const p of particles){
+        p.x+=p.vx;p.y+=p.vy; p.a+=0.02;
+        if(p.x<0) p.x=canvas.width; if(p.x>canvas.width) p.x=0;
+        if(p.y<0) p.y=canvas.height; if(p.y>canvas.height) p.y=0;
+        const g = ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r*6);
+        g.addColorStop(0, 'rgba(56,189,248,.15)');
+        g.addColorStop(1, 'rgba(56,189,248,0)');
+        ctx.fillStyle=g; ctx.beginPath(); ctx.arc(p.x,p.y,p.r*6,0,Math.PI*2); ctx.fill();
+      }
+      requestAnimationFrame(loop);
+    } loop();
+
+    // ===== Utility =====
+    function toast(msg, err=false){
+      const t = document.createElement('div');
+      t.className = 'toast'+(err?' err':'');
+      t.textContent = msg;
+      document.body.appendChild(t);
+      setTimeout(()=>t.remove(),1600);
+    }
+    function format(num){return Intl.NumberFormat('ar-EG').format(num)}
+
+    // ===== QR =====
+    function renderQR() {
+      const qrEl = document.getElementById("qrcode");
+      qrEl.innerHTML = "";
+      const qr = new QRCode.QRCode(4, QRCode.QRErrorCorrectLevel.M);
+      qr.addData(usdtAddress);
+      qr.make();
+      const imgTag = qr.createImgTag(6, 8);
+      qrEl.innerHTML = imgTag;
+    }
+
+    // ===== Clipboard / Form Buttons =====
+    $("#copyBtn").onclick = async ()=>{
+      try { await navigator.clipboard.writeText(usdtAddress); toast("تم نسخ العنوان ✅"); confetti(); }
+      catch { toast("لم يتم النسخ — انسخ يدويًا", true) }
+    };
+    $("#copyAddrTop").onclick = ()=>$("#copyBtn").click();
+    $("#formBtn").onclick = ()=>window.open(formUrl,'_blank');
+    $("#openForm").onclick = ()=>window.open(formUrl,'_blank');
+    $("#copyForm").onclick = async ()=>{
+      try { await navigator.clipboard.writeText(formUrl); toast("تم نسخ رابط النموذج ✅"); }
+      catch { toast("تعذر نسخ الرابط", true) }
+    };
+    $("#refreshQR").onclick = renderQR;
+    $("#toTop").onclick = ()=>scrollTo({top:0,behavior:'smooth'});
+    $("#bellBtn").onclick = ()=>{ incSubs(1); toast("تم الاشتراك التجريبي ✅"); confetti(); };
+
+    // ===== Countdown =====
+    function getNextDrawTime(){
+      const now = new Date();
+      const next = new Date(now);
+      next.setHours(dailyDrawHour,0,0,0);
+      if (next <= now) next.setDate(next.getDate()+1);
+      return next;
+    }
+    function updateCountdown(){
+      const now = new Date();
+      const target = getNextDrawTime();
+      const diff = target - now;
+      const totalSec = Math.max(0, Math.floor(diff/1000));
+      const d = Math.floor(totalSec/86400);
+      const h = Math.floor((totalSec%86400)/3600);
+      const m = Math.floor((totalSec%3600)/60);
+      const s = totalSec%60;
+      $("#d").textContent = String(d).padStart(2,"0");
+      $("#h").textContent = String(h).padStart(2,"0");
+      $("#m").textContent = String(m).padStart(2,"0");
+      $("#s").textContent = String(s).padStart(2,"0");
+    }
+    setInterval(updateCountdown,1000); updateCountdown();
+
+    // ===== Stats (Simulated Frontend) =====
+    const state = {
+      visitors: Math.floor(120+Math.random()*220),
+      subs: Number(localStorage.getItem('subs')||0),
+      tickets: Number(localStorage.getItem('tickets')||0),
+      jackpot: Number(localStorage.getItem('jackpot')||0) // USDT
+    };
+    function drawStats(){
+      $("#visitors").textContent = format(state.visitors);
+      $("#subs").textContent = format(state.subs);
+      $("#tickets").textContent = format(state.tickets);
+      $("#jackpot").textContent = format(state.jackpot) + " USDT";
+    }
+    function jitterVisitors(){
+      state.visitors += Math.floor((Math.random()-.5)*8);
+      state.visitors = Math.max(20, Math.min(9999, state.visitors));
+      drawStats();
+    }
+    setInterval(jitterVisitors, 2000);
+    function incSubs(n){ state.subs+=n; localStorage.setItem('subs', state.subs); drawStats(); }
+    function sellTicket(n=1){
+      state.tickets += n;
+      state.jackpot += n*baseTicketPrice;
+      localStorage.setItem('tickets', state.tickets);
+      localStorage.setItem('jackpot', state.jackpot);
+      drawStats();
+    }
+    $("#simulateSale").onclick = ()=>{ sellTicket(1); toast("تمت إضافة تذكرة (تجريبي)"); spark(); };
+
+    // ===== Draws =====
+    const draws = [
+      { id:1, title:"سحب اليوم", time:getNextDrawTime(), status:"قريب", popular:true },
+      { id:2, title:"سحب نهاية الأسبوع", time: new Date(Date.now()+3*86400000), status:"مفتوح", popular:false },
+      { id:3, title:"سحب VIP — *5 جوائز*", time: new Date(Date.now()+5*86400000), status:"مفتوح", popular:true }
+    ];
+    function cardHTML(d){
+      const t = d.time.toLocaleString('ar-EG');
+      return `<div class="ticket-card">
+        <div class="row" style="justify-content:space-between">
+          <div><strong>${d.title}</strong></div>
+          ${d.popular?'<span class="badge">شائع</span>':''}
+        </div>
+        <div class="muted">التاريخ: ${t}</div>
+        <div class="winner">
+          <div class="muted">الحالة: ${d.status}</div>
+          <div class="row">
+            <button class="btn secondary" onclick="sellTicket(1); toast('تم حجز تذكرة ✅'); confetti();">شراء 1 تذكرة</button>
+            <button class="btn ghost" onclick="window.open(formUrl,'_blank')">الدفع/النموذج</button>
+          </div>
+        </div>
+      </div>`;
+    }
+    $("#drawCards").innerHTML = draws.map(cardHTML).join("");
+
+    // ===== Winners (Mock) =====
+    const winners = [
+      { date: new Date(Date.now()-86400000), ticket:"#004213", txid:"TRX-0x9a8c…21f", amount: 90 },
+      { date: new Date(Date.now()-2*86400000), ticket:"#002771", txid:"TRX-0x77bd…c1a", amount: 110 },
+      { date: new Date(Date.now()-3*86400000), ticket:"#001009", txid:"TRX-0x1182…bb9", amount: 84 }
+    ];
+    function winnerRow(w){
+      return `<div class="ticket-card">
+        <div><strong>${w.ticket}</strong> — <span class="muted">${w.date.toLocaleDateString('ar-EG')}</span></div>
+        <div class="winner">
+          <div class="muted mono">TxID: ${w.txid}</div>
+          <div><strong>${format(w.amount)} USDT</strong></div>
+        </div>
+      </div>`
+    }
+    $("#winnersList").innerHTML = winners.map(winnerRow).join("");
+
+    // ===== Marquee random tips =====
+    const tips = [
+      "تذكير: بدّل الهاش إلى رقم عبر parseInt(sha256,16).",
+      "حافظ على الشفافية: انشر عدد التذاكر قبل السحب.",
+      "أضف Webhook للدفع لتحويل الطلب إلى Paid تلقائيًا.",
+      "استعمل CAPTCHA لتقليل السبام في النموذج."
+    ];
+    setInterval(()=>{
+      const m = document.getElementById('marquee');
+      const tip = tips[Math.floor(Math.random()*tips.length)];
+      m.textContent = "⚡ " + tip + " ⚡";
+    },12000);
+
+    // ===== Verify year and initial render =====
+    document.getElementById("year").textContent = new Date().getFullYear();
+    document.getElementById("address").textContent = usdtAddress;
+    document.getElementById("formLinkText").textContent = formUrl;
+    renderQR();
+    drawStats();
+
+    // ===== Fun FX: confetti & spark =====
+    function confetti(){
+      // minimal canvas emojis
+      const el = document.createElement('div');
+      el.style.position='fixed'; el.style.inset='0'; el.style.pointerEvents='none'; el.style.zIndex=1500;
+      document.body.appendChild(el);
+      const pieces = Array.from({length: 60}).map(()=>{
+        const p = document.createElement('div');
+        p.textContent = ['🎉','✨','🟢','🔵','🟡'][Math.floor(Math.random()*5)];
+        p.style.position='absolute'; p.style.fontSize=(14+Math.random()*14)+'px';
+        p.style.left = Math.random()*100+'%'; p.style.top = '-10%';
+        p.style.transform = 'translateY(0)';
+        el.appendChild(p);
+        const dy = 110+Math.random()*40; const rot = Math.random()*360;
+        p.animate([{transform:`translateY(0) rotate(0deg)`},{transform:`translateY(${dy}vh) rotate(${rot}deg)`}], {duration: 1200+Math.random()*800, easing:'ease-out'}).onfinish=()=>p.remove();
+        return p;
+      });
+      setTimeout(()=>el.remove(), 1800);
+    }
+    function spark(){
+      const s = document.createElement('div');
+      s.style.position='fixed'; s.style.inset='0'; s.style.pointerEvents='none'; s.style.zIndex=1500;
+      document.body.appendChild(s);
+      for(let i=0;i<12;i++){
+        const d=document.createElement('div');
+        d.style.position='absolute'; d.style.width='6px'; d.style.height='6px';
+        d.style.borderRadius='999px'; d.style.background='linear-gradient(180deg, #fff, #93c5fd)';
+        d.style.left='50%'; d.style.top='50%';
+        s.appendChild(d);
+        d.animate([{transform:'translate(-50%,-50%) scale(1)',opacity:1},{transform:`translate(${(Math.random()-.5)*280}px, ${(Math.random()-.5)*200}px) scale(0)`,opacity:0}],{duration:600+Math.random()*400, easing:'ease-out'});
+      }
+      setTimeout(()=>s.remove(), 900);
+    }
+  </script>
+</body>
+</html>
